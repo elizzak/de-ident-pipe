@@ -55,8 +55,7 @@ def key(dcmfile,group,element,value):
 def curves_callback(dataset, data_element):
     if data_element.tag.group & 0xFF00 == 0x5000:
         del dataset[data_element.tag]
-    if (0x60xx,0x4000) and (0x60xx,0x3000)
-
+   
 def cleanOverlays(dataset, data_element):
     if data_element.tag.group & 0x60xx == 0x4000:
         del dataset[data_element.tag] 
