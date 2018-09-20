@@ -16,14 +16,16 @@ def parseArgs():
     parser = argparse.ArgumentParser(description='Input parameters for where to look for dicoms')
     parser.add_argument('-N', '--patientName', help='Patient name as writen on folder containing dicoms')
     parser.add_argument('-P', '--projectName', help='Title of Project data is being pulled under')
-    return parser.parse_args()
+    args = parser.parse_args()
+    return
 
 def dicom_name(rootDir):
     for dirName, subdirList, fileList in os.walk(rootDir):
         for f in fileList:
-            print(dirName,f)
+            print(os.path.join(dirName,f))
             return(os.path.join(dirName,f))
-    return('1')   
+   
+    
 
 def main():
 
@@ -32,38 +34,42 @@ def main():
     parseArgs()
 
     # read project subject list key
-    projfile=open(args.projectName+".txt","a+") 
-    for line in projfile:
-        pass
-    newname = line
+    with open(str(args.projectName)+".txt","r") as pf:
+        ll=pf.readlines()
+        print(ll)
+   
+    # for line in reversed(open(args.projectName+".txt").readlines()):
+    #     newname=line.rstrip()
+    #     pass
+    newname=ll[-1]
 
-    dcm=dicom_name(args.patientName)
+    # write new name to text file that can be easily read by wrapper bash script
+    text=open('newname.txt', 'w+')
+    text.write(newname)
+    text.close()
+
+    dcm=dicom_name("../"+args.patientName)
+    print(dcm)
     dcmfile=pydicom.dcmread(dcm)
     oldname=dcmfile.PatientName
 
     # create an anonymization key
-    keyfile=open("test.map","+a")
-    keyfile.write(oldname "=" newname)
-
+    keyfile=open("patients.map","a+")
+    keyfile.write("%s=%s" % (oldname, newname))
+    keyfile.close()
     # add to subj list key
     # assign patient name to newname
-    projfile.write(", %s \n" %newname)
+    projfile=open(args.projectName+".txt","a+")
+    projfile.write(", %s \n" %oldname)
 
     # increment number for next patient and add a line
     inc=[int(s) for s in re.findall(r'-?\d+\.?\d*', newname)]
     inc=int(inc[0])
     inc = inc+1
     filled=str(inc).zfill(3)
-    nextline=projectName+filled
+    nextline=args.projectName+filled
     projfile.write(nextline)
-
-    # place copy of myname.cfg in project_name folder on leela
-
-
-    # run scpFwd.exe on leela
-
-
-    # create new folder and store anonymized data
-
+    projfile.close()
+    
     
 main()
