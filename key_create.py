@@ -20,10 +20,9 @@ def parseArgs():
     return
 
 def dicom_name(rootDir):
-    for dirName, subdirList, fileList in os.walk(rootDir):
-        for f in fileList:
-            print(os.path.join(dirName,f))
-            return(os.path.join(dirName,f))
+     for dirName, subdirList, fileList in os.walk(rootDir):
+         for f in fileList:
+             return(os.path.join(dirName,f))
    
     
 
@@ -48,6 +47,7 @@ def main():
     text.write(newname)
     text.close()
 
+    print("../"+args.patientName)
     dcm=dicom_name("../"+args.patientName)
     print(dcm)
     dcmfile=pydicom.dcmread(dcm)
@@ -55,7 +55,7 @@ def main():
 
     # create an anonymization key
     keyfile=open("patients.map","a+")
-    keyfile.write("%s=%s" % (oldname, newname))
+    keyfile.write("%s=%s /n" % (oldname, newname))
     keyfile.close()
     # add to subj list key
     # assign patient name to newname
