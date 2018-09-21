@@ -20,7 +20,7 @@ cd ../
 
 # move data to leela server for anonymization
 # usage: storescu [options] peer port dcmfile-in...
-storescu -aec ${project_name} --propose-lossless +sd +r 141.106.208.32 8105 $orig_folder
+storescu -aec ${project_name}/${orig_folder} --propose-lossless +sd +r 141.106.208.32 8105 $orig_folder
 
 # # place copy of config file and key file in project_name folder on leela
 scp ${project_name}/patients.map ezak@141.106.208.32:/data/scpForward/Output/${project_name} ## this line must be first

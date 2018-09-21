@@ -23,8 +23,8 @@ def dicom_name(rootDir):
      for dirName, subdirList, fileList in os.walk(rootDir):
          for f in fileList:
              return(os.path.join(dirName,f))
-   
-    
+
+
 
 def main():
 
@@ -36,7 +36,7 @@ def main():
     with open(str(args.projectName)+".txt","r") as pf:
         ll=pf.readlines()
         print(ll)
-   
+
     # for line in reversed(open(args.projectName+".txt").readlines()):
     #     newname=line.rstrip()
     #     pass
@@ -55,7 +55,7 @@ def main():
 
     # create an anonymization key
     keyfile=open("patients.map","a+")
-    keyfile.write("%s=%s /n" % (oldname, newname))
+    keyfile.write('%s=%s \n' % (oldname, newname))
     keyfile.close()
     # add to subj list key
     # assign patient name to newname
@@ -70,6 +70,6 @@ def main():
     nextline=args.projectName+filled
     projfile.write(nextline)
     projfile.close()
-    
-    
+
+
 main()
