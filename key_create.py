@@ -26,6 +26,7 @@ def dicom_name(rootDir):
 
 
 
+
 def main():
 
     ## Take in input arguments
@@ -47,7 +48,7 @@ def main():
     text.write(newname)
     text.close()
 
-    print("../"+args.patientName)
+
     dcm=dicom_name("../"+args.patientName)
     print(dcm)
     dcmfile=pydicom.dcmread(dcm)
@@ -55,7 +56,9 @@ def main():
 
     # create an anonymization key
     keyfile=open("patients.map","a+")
+
     keyfile.write('%s=%s \n' % (oldname, newname))
+
     keyfile.close()
     # add to subj list key
     # assign patient name to newname
@@ -72,4 +75,6 @@ def main():
     projfile.close()
 
 
+
 main()
+

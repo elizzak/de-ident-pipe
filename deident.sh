@@ -17,6 +17,7 @@ fi
 # make a list of patients on command line to do them all in a row
 # keep project name folder and keyflies in EXPORT folder, not anonymization
 
+
 # Keep a record of all the activity done by users on this server?
 
 
@@ -33,3 +34,4 @@ storescu -aec ${project_name} --propose-lossless +sd +r 141.106.208.32 8105 $ori
 # # place copy of config file and key file in project_name folder on leela
 scp ${project_name}/patients.map ezak@141.106.208.32:/data/scpForward/Output/${project_name} ## this line must be first
 scp myname.cfg ezak@141.106.208.32:/data/scpForward/Output/${project_name} ## this line must be last
+
