@@ -43,13 +43,13 @@ def main():
     #     pass
     newname=ll[-1]
 
-    # write new name to text file that can be easily read by wrapper bash script
-    text=open('newname.txt', 'w+')
-    text.write(newname)
-    text.close()
+    # # write new name to text file that can be easily read by wrapper bash script
+    # text=open('newname.txt', 'w+')
+    # text.write(newname)
+    # text.close()
 
 
-    dcm=dicom_name("../"+args.patientName)
+    dcm=dicom_name(args.patientName)
     print(dcm)
     dcmfile=pydicom.dcmread(dcm)
     oldname=dcmfile.PatientName
@@ -77,4 +77,3 @@ def main():
 
 
 main()
-
